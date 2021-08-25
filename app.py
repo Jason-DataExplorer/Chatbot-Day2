@@ -52,31 +52,14 @@ def handle_message(event):
             if len(match.group(1)) < 150:
                 img_list.append(match.group(1))
 
-        random_img_list = random.sample(img_list, k=5)
+        random_img_url = img_list[random.randint(0, len(img_list)+1)]
 
-        img_template = ImageCarouselTemplate(
-            columns=[ImageCarouselColumn(image_url=url, action=URIAction(label=f"image{i}", uri=url))
-            for i, url in enumerate(random_img_list)]
-        )
-
-        line_bot_api.reply_message(
-            event.reply_token,
-            TemplateSendMessage(
-                alt_text=f"ImageCarousel",
-                template=img_template
+        message = ImageSendMessage(
+            original_content_url = random_img_url,
+            preview_image_url    = random_img_url
             )
-        )
+        line_bot_api.reply_message(event.reply_token, message)
 
-        # 回覆單一圖片
-        # random_img_url = img_list[random.randint(0, len(img_list)+1)]
-
-        # message = ImageSendMessage(
-        #     original_content_url = random_img_url,
-        #     preview_image_url    = random_img_url
-        #     )
-        # line_bot_api.reply_message(event.reply_token, message)
-
-    # 回傳使用者訊息
     except:
         line_bot_api.reply_message(
             event.reply_token,
