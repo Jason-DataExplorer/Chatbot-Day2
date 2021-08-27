@@ -1,4 +1,4 @@
-# Chatbot-Day2 # 聊天機器人
+# Chatbot-Day2
 
 從「鸚鵡」機器人蛻變為搜圖小幫手！
 
